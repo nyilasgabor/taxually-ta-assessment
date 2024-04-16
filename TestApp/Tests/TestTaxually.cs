@@ -27,8 +27,25 @@ public class Tests : PageTest
 
         await signupPage.Open(page);
         await signupPage.SelectLocation(signupPage.OriginCountry);
-        await signupPage.SelectTargetCountry(5, MethodType.Random);
+        await signupPage.SelectTargetCountry(5);
 
         await signupPage.HelpMeGetVatNumbers();
+        await signupPage.NextStep();
+
+        BusinessDetailsPage businessDetailsPage = new BusinessDetailsPage(page);
+        
+        await businessDetailsPage.SetLegalStatus();
+        await businessDetailsPage.SetNameOfBusiness();
+        await businessDetailsPage.SetIncorporationNumber();
+        await businessDetailsPage.SetIncorporationDate();
+        await businessDetailsPage.SetState();
+        await businessDetailsPage.SetZip();
+        await businessDetailsPage.SetCity();
+        await businessDetailsPage.SetStreet();
+        await businessDetailsPage.SetHouseNumber();
+        
+        await businessDetailsPage.NextStep();
+
+        await BrowserUtil.Quit();
     }
 }

@@ -36,6 +36,8 @@ namespace TestApp.Pages
             };
         }
 
+
+
         public async Task SelectLocation(string country)
         {
             var element = _page.GetByRole(AriaRole.Combobox).GetByRole(AriaRole.Textbox);
@@ -70,14 +72,19 @@ namespace TestApp.Pages
 
         public async Task HelpMeGetVatNumbers()
         {
-            await _page.Locator("app-add-country-vatnumber div")
-              .Filter(new() { HasText = $"{OriginCountry} Help me get a VAT" }).GetByRole(AriaRole.Button).ClickAsync();
-
             _selectedCountries.ToList().ForEach(country => 
                 _page.Locator("app-add-country-vatnumber div")
                 .Filter(new() { HasText = $"{country} Help me get a VAT" })
                 .GetByRole(AriaRole.Button)
                 .ClickAsync());
+
+            await _page.Locator("app-add-country-vatnumber div")
+                .Filter(new() { HasText = $"{OriginCountry} Help me get a VAT" }).GetByRole(AriaRole.Button).ClickAsync();
+        }
+
+        public async Task NextStep()
+        {
+            await _page.GetByRole(AriaRole.Button, new() { Name = "Next step" }).ClickAsync();
         }
     }
 }
