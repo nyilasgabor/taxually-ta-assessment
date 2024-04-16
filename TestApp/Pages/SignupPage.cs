@@ -18,7 +18,8 @@ namespace TestApp.Pages
 
         public async Task SelectLocation(string country)
         {
-            await _page.Locator("[formcontrolname=countryOfEstablishment]").SelectOptionAsync(country);
+            await _page.GetByRole(AriaRole.Combobox).GetByRole(AriaRole.Textbox).ClickAsync();
+            await _page.GetByRole(AriaRole.Combobox).GetByRole(AriaRole.Textbox).FillAsync(country);
         }
     }
 }
