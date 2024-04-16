@@ -26,6 +26,9 @@ public class Tests : PageTest
         await Expect(page).ToHaveURLAsync(new Regex(signupPage.PageAddress));
 
         await signupPage.Open(page);
-        await signupPage.SelectLocation("Hungary");
+        await signupPage.SelectLocation(signupPage.OriginCountry);
+        await signupPage.SelectTargetCountry(5, MethodType.Random);
+
+        await signupPage.HelpMeGetVatNumbers();
     }
 }
